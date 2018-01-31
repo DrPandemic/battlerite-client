@@ -1,20 +1,29 @@
-from enum import Enum
 import requests
+from .response import Response
+from .constants import ACTIONS, BASE_URL
 
-ACTIONS = Enum('API functions', 'MATCHES')
-BASE_URL = 'https://api.dc01.gamelockerapp.com/shards/global'
 
 class Client:
-    def __init__(self, api_key):
+    """
+    This class is used to interact with Battlerite's API.
+    """
+
+    def __init__(self, api_key: str) -> None:
         self.api_key = api_key
 
-    def get_url(self, action):
+    def get_url(self, action: ACTIONS) -> str:
+        """
+        Returns the URL for a given action.
+        """
         if action == ACTIONS.MATCHES:
             return f"{BASE_URL}/matches"
         else:
             raise NotImplementedError()
 
-    def call(self, action):
+    def call(self, action: ACTIONS) -> Response:
+        """
+        Performs the API call and returns a Reponse.
+        """
         headers = {
             'Accept': 'application/vnd.api+json',
             'Accept-Encoding': 'gzip',
@@ -23,8 +32,8 @@ class Client:
         url = self.get_url(action)
 
         if action == ACTIONS.MATCHES:
-            response = requests.get(url, headers=headers)
+            response = Response(action, requests.get(url, headers=headers))
         else:
             raise NotImplementedError()
 
-        return response.json()
+        return response
