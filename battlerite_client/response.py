@@ -20,6 +20,7 @@ class Response:
             return None
 
         if self.action == ACTIONS.MATCHES:
-            return [Match(data) for data in self.raw.json()['data']]
+            complete = self.raw.json()
+            return [Match(data, complete) for data in complete['data']]
         else:
             raise NotImplementedError()
