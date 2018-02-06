@@ -17,12 +17,14 @@ class Client:
         """
         if action == ACTIONS.MATCHES:
             return f"{BASE_URL}/matches"
+        elif action == ACTIONS.PLAYERS:
+            return f"{BASE_URL}/players"
         else:
             raise NotImplementedError()
 
     def call(self, action: ACTIONS) -> Response:
         """
-        Performs the API call and returns a Reponse.
+        Performs the API call and returns a Response.
         """
         headers = {
             'Accept': 'application/vnd.api+json',
@@ -32,6 +34,8 @@ class Client:
         url = self.get_url(action)
 
         if action == ACTIONS.MATCHES:
+            response = Response(action, requests.get(url, headers=headers))
+        elif action == ACTIONS.PLAYERS:
             response = Response(action, requests.get(url, headers=headers))
         else:
             raise NotImplementedError()
