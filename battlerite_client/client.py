@@ -1,4 +1,5 @@
 import requests
+from typing import Dict
 from .response import Response
 from .constants import ACTIONS, BASE_URL
 
@@ -11,6 +12,12 @@ class Client:
     def __init__(self, api_key: str) -> None:
         self.api_key = api_key
 
+    def matches(self, params: Dict = {}):
+        """
+        Returns matches.
+        """
+        return self.call(ACTIONS.MATCHES, params)
+
     def get_url(self, action: ACTIONS) -> str:
         """
         Returns the URL for a given action.
@@ -20,7 +27,7 @@ class Client:
         else:
             raise NotImplementedError()
 
-    def call(self, action: ACTIONS) -> Response:
+    def call(self, action: ACTIONS, params: Dict) -> Response:
         """
         Performs the API call and returns a Reponse.
         """
@@ -32,7 +39,7 @@ class Client:
         url = self.get_url(action)
 
         if action == ACTIONS.MATCHES:
-            response = Response(action, requests.get(url, headers=headers))
+            response = Response(action, requests.get(url, headers=headers, params=params))
         else:
             raise NotImplementedError()
 

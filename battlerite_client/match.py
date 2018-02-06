@@ -1,6 +1,7 @@
 from typing import Dict
 from .helpers import find_node
 from .round import Round
+from .roster import Roster
 
 class Match:
     """
@@ -30,3 +31,6 @@ class Match:
         self.server_type = tags.get('serverType')
 
         self.rounds = [Round(find_node(response, r['id'])) for r in relationships['rounds']['data']]
+        self.rosters = [Roster(find_node(response, r['id']), response) for r in relationships.get('rosters', {}).get('data', [])]
+        self.spectators = relationships.get('spectators', [])
+        self.links = [link['self'] for link in relationships.get('links', [])]
