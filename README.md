@@ -1,5 +1,5 @@
 # Battlerite Client
-An python API client for
+A python API client for
 [Battlerite's API](https://battlerite-docs.readthedocs.io).
 
 # Disclaimers
@@ -7,12 +7,12 @@ This project is not complete. We are not planning to parse everything right now.
 For example, the telemetry API call and the assets relationships are not
 managed. We are implementing what we need for our other
 [project Battlerates](https://github.com/DrPandemic/battlerates). If you need
-something more, feel free to open a PR.
+more, feel free to open a PR.
 
 # Usage
 The data structure we expose is really similar to the one from the
 [official API](https://battlerite-docs.readthedocs.io) but a little bit more
-flatten. We often merge many objects into a single one.
+flattened. We often merge many objects into a single one.
 
 This is an example to get a player's team's division.
 ```python
