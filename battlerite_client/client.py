@@ -2,6 +2,8 @@ import requests
 from typing import Dict
 from .response import Response
 from .constants import ACTIONS, BASE_URL
+from .team import Team
+from .match import Match
 
 
 class Client:
@@ -12,11 +14,17 @@ class Client:
     def __init__(self, api_key: str) -> None:
         self.api_key = api_key
 
-    def matches(self, params: Dict = {}):
+    def matches(self, params: Dict = {}) -> Response:
         """
         Returns matches.
         """
         return self.call(ACTIONS.MATCHES, params)
+
+    def teams(self, season: int, player_ids: [int]) -> Response:
+        """
+        Returns a list of teams for given players during a season.
+        """
+        return self.call(ACTIONS.TEAMS, {'tag[season]': season, 'tag[playerIds]': player_ids})
 
     def get_url(self, action: ACTIONS) -> str:
         """
@@ -24,6 +32,8 @@ class Client:
         """
         if action == ACTIONS.MATCHES:
             return f"{BASE_URL}/matches"
+        elif action == ACTIONS.TEAMS:
+            return f"{BASE_URL}/teams"
         else:
             raise NotImplementedError()
 
@@ -38,9 +48,7 @@ class Client:
         }
         url = self.get_url(action)
 
-        if action == ACTIONS.MATCHES:
-            response = Response(action, requests.get(url, headers=headers, params=params))
+        if action == ACTIONS.MATCHES or action == ACTIONS.TEAMS:
+            return Response(action, requests.get(url, headers=headers, params=params))
         else:
             raise NotImplementedError()
-
-        return response
