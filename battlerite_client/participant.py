@@ -10,6 +10,7 @@ class Participant:
         attributes = data.get('attributes', {})
         stats = attributes.get('stats', {})
 
+        self.id = data.get('id')
         self.actor = attributes.get('actor')
         self.shard_id = attributes.get('shardId')
         self.ability_uses = stats.get('abilityUses')
