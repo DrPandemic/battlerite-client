@@ -32,14 +32,19 @@ class Client:
         """
         if action == ACTIONS.MATCHES:
             return f"{BASE_URL}/matches"
+
+        elif action == ACTIONS.PLAYERS:
+            return f"{BASE_URL}/players"
+
         elif action == ACTIONS.TEAMS:
             return f"{BASE_URL}/teams"
+
         else:
             raise NotImplementedError()
 
     def call(self, action: ACTIONS, params: Dict) -> Response:
         """
-        Performs the API call and returns a Reponse.
+        Performs the API call and returns a Response.
         """
         headers = {
             'Accept': 'application/vnd.api+json',
@@ -48,7 +53,7 @@ class Client:
         }
         url = self.get_url(action)
 
-        if action == ACTIONS.MATCHES or action == ACTIONS.TEAMS:
+        if action == ACTIONS.MATCHES or action == ACTIONS.TEAMS or action == ACTIONS.PLAYERS:
             return Response(action, requests.get(url, headers=headers, params=params))
         else:
             raise NotImplementedError()

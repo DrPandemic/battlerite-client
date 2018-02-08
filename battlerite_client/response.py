@@ -1,5 +1,6 @@
 from .constants import ACTIONS, SUCCESS_CODES
 from .match import Match
+from .players import Player
 from .team import Team
 
 
@@ -27,6 +28,9 @@ class Response:
         if self.action == ACTIONS.MATCHES:
             complete = self.raw.json()
             return [Match(data, complete) for data in complete['data']]
+        elif self.action == ACTIONS.PLAYERS:
+            complete = self.raw.json()
+            return [Player(data, complete) for data in complete['data']]
         elif self.action == ACTIONS.TEAMS:
             complete = self.raw.json()
             return [Team(data, complete) for data in complete['data']]
