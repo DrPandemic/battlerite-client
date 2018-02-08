@@ -15,4 +15,5 @@ class Roster:
         self.won = attributes.get('won') == 'true'
 
         participants = data.get('relationships', {}).get('participants', {}).get('data', [])
-        self.participants = [Participant(find_node(response, p['id']), response) for p in participants]
+        self.participants = [Participant(find_node(response, p['id']), response)
+                             for p in participants]
