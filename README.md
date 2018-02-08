@@ -69,9 +69,14 @@ Returns a list of teams for given players during a season.
 It represents a response from the API.
 
 ### attributes
-- `response.raw -> Requests.response` The raw response from the Requests library.
+- `response.raw -> Requests.response` The raw response from the Requests
+library.
 - `response.action -> ACTIONS` The action used to received this response.
 - `response.success -> bool` If the request was successful.
+- `response.rate_limit_limit -> int` The limit of request per minute.
+- `response.rate_limit_remaining -> int` The number of remaining request.
+- `response.rate_limit_reset -> int` The number of nanosecond before the next
+reset.
 
 ### parse
 `response.parse() -> ?Object`
