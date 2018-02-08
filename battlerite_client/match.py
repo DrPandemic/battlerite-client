@@ -11,7 +11,7 @@ class Match:
     def __init__(self, data: Dict, response: Dict) -> None:
         attributes = data.get('attributes', {})
         relationships = data.get('relationships', {})
-        tags = attributes.get('tags', {})
+        tags = attributes.get('tags')
         links = data.get('links', {})
         stats = attributes.get('stats', {})
 
@@ -27,8 +27,9 @@ class Match:
         self.title_id = attributes.get('titleId')
         self.link_schema = links.get('schema')
         self.link = links.get('self')
-        self.ranking_type = tags.get('rankingType')
-        self.server_type = tags.get('serverType')
+        if type(tags) is dict:
+            self.ranking_type = tags.get('rankingType')
+            self.server_type = tags.get('serverType')
 
         self.rounds = [Round(find_node(response, r['id'])) for r in relationships.get('rounds', {}).get('data', [])]
         self.rosters = [Roster(find_node(response, r['id']), response) for r in relationships.get('rosters', {}).get('data', [])]

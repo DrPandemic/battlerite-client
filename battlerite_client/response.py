@@ -12,6 +12,10 @@ class Response:
         self.raw = response
         self.action = action
         self.success = response.status_code in SUCCESS_CODES
+        self.rate_exceeded = response.status_code == 429
+        self.rate_limit_limit = response.headers.get('X-RateLimit-Limit')
+        self.rate_limit_remaining = response.headers.get('X-RateLimit-Remaining')
+        self.rate_limit_reset =  response.headers.get('X-RateLimit-Reset')
 
     def parse(self):
         """
