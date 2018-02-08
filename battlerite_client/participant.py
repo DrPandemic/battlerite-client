@@ -1,5 +1,6 @@
 from typing import Dict
 from .helpers import find_node
+from .player import Player
 
 class Participant:
     """
@@ -9,6 +10,7 @@ class Participant:
     def __init__(self, data: Dict, response: Dict) -> None:
         attributes = data.get('attributes', {})
         stats = attributes.get('stats', {})
+        relationships = data.get('relationships', {})
 
         self.id = data.get('id')
         self.actor = attributes.get('actor')
@@ -32,4 +34,6 @@ class Participant:
         self.side = stats.get('side')
         self.time_alive = stats.get('timeAlive')
 
-        # TODO: Player relationship
+        player = relationships.get('player', {}).get('data', [])
+        self.player = Player(find_node(response, player['id']))
+
