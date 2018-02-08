@@ -1,6 +1,7 @@
 from .constants import ACTIONS, SUCCESS_CODES
 from .match import Match
 from .players import Player
+from .team import Team
 
 
 class Response:
@@ -12,6 +13,10 @@ class Response:
         self.raw = response
         self.action = action
         self.success = response.status_code in SUCCESS_CODES
+        self.rate_exceeded = response.status_code == 429
+        self.rate_limit_limit = response.headers.get('X-RateLimit-Limit')
+        self.rate_limit_remaining = response.headers.get('X-RateLimit-Remaining')
+        self.rate_limit_reset =  response.headers.get('X-RateLimit-Reset')
 
     def parse(self):
         """
@@ -26,5 +31,8 @@ class Response:
         elif self.action == ACTIONS.PLAYERS:
             complete = self.raw.json()
             return [Player(data, complete) for data in complete['data']]
+        elif self.action == ACTIONS.TEAMS:
+            complete = self.raw.json()
+            return [Team(data, complete) for data in complete['data']]
         else:
             raise NotImplementedError()
