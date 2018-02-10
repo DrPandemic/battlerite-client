@@ -9,6 +9,11 @@ managed. We are implementing what we need for our other
 [project Battlerates](https://github.com/DrPandemic/battlerates). If you need
 more, feel free to open a PR.
 
+## Types
+All the primitive types are not enforced by this package. So, if the API
+changes, variables produced by this package could change. Also, every variable of
+a primitive type will be `None` if it's not present in the response.
+
 # Usage
 The data structure we expose is really similar to the one from the
 [official API](https://battlerite-docs.readthedocs.io) but a little bit more
@@ -166,11 +171,11 @@ called on `Client` this parse will return a list of `Match`.
 
 ## Player
 ### attributes
-`player.id -> str`
-`player.name -> str`
-`player.patch_version -> str`
-`player.shard_id -> str`
-`player.stats -> Dict[str, int]`
-`player.title_id -> str`
-`player.link_schema -> str`
-`player.link -> str`
+- `player.id -> str`
+- `player.name -> str`
+- `player.patch_version -> str`
+- `player.shard_id -> str`
+- `player.stats -> Dict[str, int]`
+- `player.title_id -> str`
+- `player.link_schema -> str`
+- `player.link -> str`
