@@ -1,6 +1,6 @@
 from .constants import ACTIONS, SUCCESS_CODES
 from .match import Match
-from .players import Player
+from .player import Player
 from .team import Team
 
 
