@@ -30,6 +30,9 @@ class Match:
         if type(tags) is dict:
             self.ranking_type = tags.get('rankingType')
             self.server_type = tags.get('serverType')
+        else:
+            self.ranking_type = None
+            self.server_type = None
 
         rounds = relationships.get('rounds', {}).get('data', [])
         rosters = relationships.get('rosters', {}).get('data', [])

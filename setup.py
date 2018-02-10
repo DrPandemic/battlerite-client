@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='battlerite-client',
-      version='0.1.1',
+      version='0.1.2',
       description='Battlerite REST API client',
       url='https://github.com/DrPandemic/battlerite-client',
       author='DrPandemic',
