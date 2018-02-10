@@ -24,7 +24,8 @@ class Client:
         """
         Returns a list of teams for given players during a season.
         """
-        return self.call(ACTIONS.TEAMS, {'tag[season]': season, 'tag[playerIds]': player_ids})
+        return self.call(ACTIONS.TEAMS,
+                         {'tag[season]': season, 'tag[playerIds]': player_ids})
 
     def get_url(self, action: ACTIONS) -> str:
         """
@@ -32,13 +33,10 @@ class Client:
         """
         if action == ACTIONS.MATCHES:
             return f"{BASE_URL}/matches"
-
         elif action == ACTIONS.PLAYERS:
             return f"{BASE_URL}/players"
-
         elif action == ACTIONS.TEAMS:
             return f"{BASE_URL}/teams"
-
         else:
             raise NotImplementedError()
 
@@ -53,7 +51,8 @@ class Client:
         }
         url = self.get_url(action)
 
-        if action == ACTIONS.MATCHES or action == ACTIONS.TEAMS or action == ACTIONS.PLAYERS:
-            return Response(action, requests.get(url, headers=headers, params=params))
+        if action in [ACTIONS.MATCHES, ACTIONS.TEAMS, ACTIONS.PLAYERS]:
+            return Response(action,
+                            requests.get(url, headers=headers, params=params))
         else:
             raise NotImplementedError()

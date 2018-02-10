@@ -31,7 +31,10 @@ class Match:
             self.ranking_type = tags.get('rankingType')
             self.server_type = tags.get('serverType')
 
-        self.rounds = [Round(find_node(response, r['id'])) for r in relationships.get('rounds', {}).get('data', [])]
-        self.rosters = [Roster(find_node(response, r['id']), response) for r in relationships.get('rosters', {}).get('data', [])]
+        rounds = relationships.get('rounds', {}).get('data', [])
+        rosters = relationships.get('rosters', {}).get('data', [])
+        self.rounds = [Round(find_node(response, r['id'])) for r in rounds]
+        self.rosters = [Roster(find_node(response, r['id']), response)
+                        for r in rosters]
         self.spectators = relationships.get('spectators', [])
         self.links = [link['self'] for link in relationships.get('links', [])]
