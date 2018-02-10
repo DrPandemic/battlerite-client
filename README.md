@@ -145,6 +145,7 @@ called on `Client` this parse will return a list of `Match`.
 - `match.score -> int`
 - `match.side -> int`
 - `match.time_alive -> int`
+- `match.player -> Player` It seems to always be empty for some reason.
 
 ## Team
 ### attributes
@@ -162,3 +163,14 @@ called on `Client` this parse will return a list of `Match`.
 - `match.top_league -> int`
 - `match.wins -> int`
 - `match.title_id -> str`
+
+## Player
+### attributes
+`player.id -> str`
+`player.name -> str`
+`player.patch_version -> str`
+`player.shard_id -> str`
+`player.stats -> Dict[str, int]`
+`player.title_id -> str`
+`player.link_schema -> str`
+`player.link -> str`
