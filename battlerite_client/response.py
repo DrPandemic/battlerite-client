@@ -30,7 +30,7 @@ class Response:
             return [Match(data, complete) for data in complete['data']]
         elif self.action == ACTIONS.PLAYERS:
             complete = self.raw.json()
-            return [Player(data, complete) for data in complete['data']]
+            return [Player(data) for data in complete['data']]
         elif self.action == ACTIONS.TEAMS:
             complete = self.raw.json()
             return [Team(data, complete) for data in complete['data']]
