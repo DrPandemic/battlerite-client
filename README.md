@@ -11,8 +11,8 @@ more, feel free to open a PR.
 
 ## Types
 All the primitive types are not enforced by this package. So, if the API
-changes, variables produced by this package could change. Also, every varible of
-a primitive tpye will be `None` if it's not present in the response.
+changes, variables produced by this package could change. Also, every variable of
+a primitive type will be `None` if it's not present in the response.
 
 # Usage
 The data structure we expose is really similar to the one from the
